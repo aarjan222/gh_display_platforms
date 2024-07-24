@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}View All Users{% endblock %}
+
+{% block content %}
+<div class="table-container">
+    <table class="user-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in values %}
+            <tr>
+                <td>{{ item.name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    .table-container {
+        background-color: azure;
+        margin: 20px;
+        max-width: 400px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-table {
+        width: 100%;
+    }
+
+    .user-table th,
+    .user-table td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .user-table th {
+        background-color: aqua;
+        color: black;
+    }
+
+    .user-table tr:hover {
+        background-color: #f1f1f1;
+    }
+</style>
+{% endblock %}

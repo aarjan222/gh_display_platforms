@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Login Page{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+
+    {% for msg in messages %}
+    <p class="flash-message">{{ msg }}</p>
+    {% endfor %}
+
+    {% endif %}
+    {% endwith %}
+
+    <form action="#" method="post" class="login-form">
+        <h2>Login</h2>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="nm" required />
+        </div>
+        <button type="submit" class="submit-button">Submit</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    .login-container {
+        background-color: azure;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        text-align: center;
+    }
+
+    .flash-message {
+        font-size: 30px;
+        color: #e74c3c;
+        background-color: #f8d7da;
+        padding: 8px;
+        text-align: center;
+    }
+
+    .login-form h2 {
+        margin-bottom: 20px;
+        color: blue;
+    }
+
+    .form-group label {
+        margin-bottom: 15px;
+        font-weight: bold;
+        font-size: px;
+    }
+
+    .form-group input {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .submit-button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    .submit-button:hover {
+        background-color: #0056b3;
+    }
+</style>
+{% endblock %}

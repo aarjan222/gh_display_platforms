@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Home Page{% endblock %}
+
+{% block heading %}
+<h1>Welcome to Pulchowk Greenhouse!</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <div class="hero">
+        <img src="{{ url_for('static', filename='images/gh.jpg') }}" alt="Greenhouse" class="hero-image">
+        <br>
+        <h2>Explore Your Greenhouse from Anywhere</h2>
+    </div>
+
+    <div class="info">
+        <p>Welcome to your digital greenhouse! Our website provides real-time data on various aspects of your
+            greenhouse, allowing you to monitor conditions and make adjustments from anywhere in the world. Stay
+            informed and make data-driven decisions to ensure the best environment for your plants.</p>
+    </div>
+
+    <div class="features">
+        <p><strong>Features: </strong></p>
+        <ul>
+            <li>Temperature</li>
+            <li>Humidity data</li>
+            <li>Soil Moisture</li>
+            <li>Soil PH value</li>
+            <li>Light</li>
+        </ul>
+    </div>
+
+    <div class="info">
+        <p>By leveraging modern technology, you can ensure optimal growing conditions for your plants, even when you're
+            not physically present in the greenhouse.</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    body {
+        background-color: azure;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        background-color: aliceblue;
+        font-family: Arial, sans-serif;
+    }
+
+    .hero {
+        text-align: center;
+    }
+
+    .hero-image {
+        width: 500px;
+    }
+
+    .hero-image:hover {
+        transform: scale(1.05);
+    }
+</style>
+{% endblock %}
