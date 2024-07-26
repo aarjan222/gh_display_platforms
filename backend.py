@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, request, flash, session, url_for
 from flask_sqlalchemy import SQLAlchemy
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 
 app = Flask(__name__)
@@ -21,6 +21,7 @@ class users(db.Model):
         self.name = name
 
 
+@app.route('/')
 @app.route('/home')
 def home():
     return render_template("index.html")
@@ -71,15 +72,39 @@ def logout():
     return redirect(url_for("login"))
 
 
+@app.route('/monitor')
+def monitor():
+    param1 = request.args.get('param1')
+    crops = ['Tomatoe', 'Lettuce', 'Cucumber', 'Lavender', 'Strawberry']
+    greenhouse_data = [
+        {
+            'time': (datetime.now() - timedelta(hours=i)).strftime("%Y-%m-%d %H:%M"),
+            'crops': crops[i],
+            'temperature': 25.5 + i,
+            'humidity': 60.0 + i
+        }
+        for i in range(5)
+    ]
+    return render_template('monitor.html', r=param1, data=greenhouse_data)
+
+
+@app.route('/control')
+def control():
+    return render_template('control.html')
+
+
 @app.route('/view')
 def view():
-    user = session.get('user')
-    if user == "admin":
-        return render_template("view.html", values=users.query.all())
-    else:
-        flash(f'Cant view users information, login as admin account')
+    if 'user' in session:
+        user = session.get('user')
+        if user == "admin":
+            return render_template("view.html", values=users.query.all())
+        else:
+            flash(f'Cant view users information, login as admin account')
 
-        return redirect(url_for("user"))
+            return redirect(url_for("user"))
+    else:
+        return redirect(url_for('login'))
 
 
 @app.route('/del/<usr>')

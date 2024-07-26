@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Monitor{% endblock %}
+{% block content %}
+
+<div class="greenhouse-info">
+    <h2>Geenhouse {{r}}</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Crops</th>
+                <th>Temperature</th>
+                <th>Humidity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in data %}
+            <tr>
+                <td>{{ entry.time }}</td>
+                <td>{{ entry.crops }}</td>
+                <td>{{ entry.temperature }}</td>
+                <td>{{ entry.humidity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    .greehouse-info {
+        background-color: aliceblue;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .greenhouse-info h2 {
+        color: #007bff;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #007bff;
+        color: white;
+    }
+</style>
+{% endblock %}
