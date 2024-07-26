@@ -1,0 +1,30 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+venv/
+*.env
+
+# Flask
+instance/
+*.sqlite3
+*.db
+*.log
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Node.js (if you're using any npm packages)
+node_modules/

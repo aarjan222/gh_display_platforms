@@ -18,14 +18,25 @@
         <tbody>
             {% for entry in data %}
             <tr>
-                <td>{{ entry.time }}</td>
-                <td>{{ entry.crops }}</td>
-                <td>{{ entry.temperature }}</td>
-                <td>{{ entry.humidity }}</td>
+                <td>{{ entry['Time'] }}</td>
+                <td>{{ entry['Crop'] }}</td>
+                <td>{{ entry['Temperature'] }}</td>
+                <td>{{ entry['Humidity'] }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    <div class="chart-container">
+        <h3>Temperature Over Time</h3>
+        {{ temperature_chart|safe }}
+    </div>
+
+    <div class="chart-container">
+        <h3>Humidity Over Time</h3>
+        {{ humidity_chart|safe }}
+    </div>
+
 </div>
 {% endblock %}
 
@@ -43,21 +54,26 @@
     }
 
     table {
-        width: 100%;
-        border-collapse: collapse;
+        width: 50%;
         margin: 20px 0;
     }
 
     th,
     td {
-        border: 1px solid #ddd;
-        padding: 8px;
+        border: 1px solid #007bff;
+        padding: 3px;
         text-align: left;
+        background-color: #ddd;
     }
 
     th {
         background-color: #007bff;
         color: white;
+    }
+
+    .chart-container {
+        width: 45%;
+        box-sizing: border-box;
     }
 </style>
 {% endblock %}

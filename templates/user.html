@@ -18,12 +18,6 @@ User
     {% endwith %}
 
     <p>Welcome, {{user}}</p>
-
-    <div>
-        <button onclick="window.location.href='{{ url_for('monitor', param1=user) }}'">Monitor</button>
-        <button onclick="window.location.href='{{ url_for('control') }}'">Control</button>  
-    </div>
-
 </div>
 {% endblock %}
 

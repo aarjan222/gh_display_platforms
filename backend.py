@@ -1,7 +1,10 @@
+import plotly.io as pio
+import plotly.express as px
 from flask import Flask, render_template, redirect, request, flash, session, url_for
 from flask_sqlalchemy import SQLAlchemy
-from datetime import timedelta, datetime
-
+from datetime import timedelta
+import boto3
+import pandas as pd
 
 app = Flask(__name__)
 app.secret_key = "helloworld"
@@ -9,6 +12,13 @@ app.permanent_session_lifetime = timedelta(minutes=2)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+s3 = boto3.resource(
+    's3',
+    region_name='us-east-1',
+    aws_access_key_id='AKIA6ODU7PIYLXUTAPDL',
+    aws_secret_access_key='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'
+)
 
 db = SQLAlchemy(app)
 
@@ -42,6 +52,7 @@ def login():
         return redirect(url_for("user"))
     else:
         if "user" in session:
+            # TODO: to switch login user instead of redirecting to user and login page
             flash(f"Already Logged in by, {session['user']}", "info")
             return redirect(url_for("user"))
         flash(f"Create Account first", "info")
@@ -74,18 +85,38 @@ def logout():
 
 @app.route('/monitor')
 def monitor():
-    param1 = request.args.get('param1')
-    crops = ['Tomatoe', 'Lettuce', 'Cucumber', 'Lavender', 'Strawberry']
-    greenhouse_data = [
-        {
-            'time': (datetime.now() - timedelta(hours=i)).strftime("%Y-%m-%d %H:%M"),
-            'crops': crops[i],
-            'temperature': 25.5 + i,
-            'humidity': 60.0 + i
-        }
-        for i in range(5)
-    ]
-    return render_template('monitor.html', r=param1, data=greenhouse_data)
+    if 'user' in session:
+        param1 = request.args.get('param1')
+
+        # -----------------------Do Only Once when needed-----------------------------------------------
+        # uploading datas to s3 buckets
+        # s3.Bucket('s3-to-local').upload_file(
+        #     Filename='/home/aarjan/pajor_mroject/flask/gh_display_platforms/static/images/gh.jpg', Key='gh.jpg')
+
+        # downloading datas from s3 buckets
+        # s3.Bucket(
+        #     's3-to-local').download_file(Key='crop_data.csv', Filename='crop_data.csv')
+        # ----------------------------------------------------------------------------------------------
+
+        greenhouse_data = pd.read_csv('crop_data.csv')
+
+        # charts -> plotly figures -> html strings
+
+        # Create Plotly figures for different charts
+        fig_temp = px.line(greenhouse_data, x='Time',
+                           y='Temperature', title='Temperature')
+        fig_hum = px.line(greenhouse_data, x='Time',
+                          y='Humidity', title='Humidity')
+
+        # Convert Plotly figures to HTML strings
+        temp_chart = pio.to_html(fig_temp, full_html=False)
+        hum_chart = pio.to_html(fig_hum, full_html=False)
+
+        return render_template('monitor.html', r=param1, data=greenhouse_data.to_dict(orient='records'),
+                               temperature_chart=temp_chart, humidity_chart=hum_chart)
+    else:
+        flash(f'First create account using login page')
+        return render_template('login.html')
 
 
 @app.route('/control')
@@ -100,8 +131,8 @@ def view():
         if user == "admin":
             return render_template("view.html", values=users.query.all())
         else:
+            print('only admin can view this page')
             flash(f'Cant view users information, login as admin account')
-
             return redirect(url_for("user"))
     else:
         return redirect(url_for('login'))
