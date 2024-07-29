@@ -8,8 +8,7 @@ venv/
 *.env
 
 # Flask
-instance/
-*.sqlite3
+instance/*.sqlite3
 *.db
 *.log
 

@@ -27,9 +27,6 @@ s3 = boto3.resource(
 db = SQLAlchemy(app)
 USERS = {}
 
-with app.app_context():
-    db.create_all()
-
 
 class users(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
@@ -41,6 +38,10 @@ class users(db.Model):
         self.password = password
 
 
+with app.app_context():
+    db.create_all()
+
+
 @app.route('/')
 @app.route('/home')
 def home():
@@ -49,9 +50,6 @@ def home():
 
 @app.route('/register', methods=["POST", "GET"])
 def register():
-    # ---------------To clear all the Database--------------------------
-    # users.__table__.drop(db.engine)
-    # db.create_all()
     if request.method == "POST":
         name = request.form['nm']
         password = request.form['password']
