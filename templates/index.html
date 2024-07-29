@@ -15,25 +15,51 @@
     </div>
 
     <div class="info">
-        <p>Welcome to your digital greenhouse! Our website provides real-time data on various aspects of your
-            greenhouse, allowing you to monitor conditions and make adjustments from anywhere in the world. Stay
-            informed and make data-driven decisions to ensure the best environment for your plants.</p>
+        <p>Experience the convenience of managing your greenhouse from anywhere! Our platform offers real-time insights
+            into key environmental conditions, empowering you to optimize plant growth with ease.</p>
     </div>
 
     <div class="features">
-        <p><strong>Features: </strong></p>
+        <h3>Key Features:</h3>
         <ul>
-            <li>Temperature</li>
-            <li>Humidity data</li>
-            <li>Soil Moisture</li>
-            <li>Soil PH value</li>
-            <li>Light</li>
+            <li>Real-Time Temperature Monitoring</li>
+            <li>Humidity Tracking</li>
+            <li>Soil Moisture Analysis</li>
+            <li>Soil pH Measurement</li>
+            <li>Light Intensity Control</li>
         </ul>
     </div>
 
     <div class="info">
-        <p>By leveraging modern technology, you can ensure optimal growing conditions for your plants, even when you're
-            not physically present in the greenhouse.</p>
+        <p>Our platform not only helps you monitor current conditions but also provides historical data and trends,
+            enabling you to make informed decisions. Whether you're adjusting watering schedules, altering ventilation
+            settings, or tweaking nutrient levels, Pulchowk Greenhouse gives you the tools to optimize your greenhouse
+            environment.</p>
+    </div>
+
+    <div class="benefits">
+        <h3>Why Choose Pulchowk Greenhouse?</h3>
+        <p>Our system is designed with the grower's needs in mind:</p>
+        <ul>
+            <li><strong>Accessibility:</strong> Access your greenhouse data from any device, whether you're at home, in
+                the office, or on the go.</li>
+            <li><strong>Scalability:</strong> Suitable for greenhouses of all sizes, from small personal setups to large
+                commercial operations.</li>
+            <li><strong>Security:</strong> Your data is secure with us. We prioritize your privacy and ensure that your
+                information is protected.</li>
+        </ul>
+    </div>
+
+    <div class="cta">
+        <p>Ready to take control of your greenhouse environment? <a href="{{ url_for('register') }}">Register now</a> to
+            start monitoring your greenhouse or <a href="{{ url_for('login') }}">login</a> to access your data and make
+            adjustments on the go.</p>
+    </div>
+
+    <div class="info">
+        <p>Utilize cutting-edge technology to maintain the perfect growing environment for your plants, even when you're
+            not on-site. Pulchowk Greenhouse makes it easy to stay connected and responsive to your greenhouse's needs.
+        </p>
     </div>
 </div>
 {% endblock %}
@@ -60,6 +86,31 @@
 
     .hero-image:hover {
         transform: scale(1.05);
+    }
+
+    .features,
+    .benefits {
+        margin-top: 20px;
+    }
+
+    .features ul,
+    .benefits ul {
+        list-style-type: disc;
+        padding-left: 20px;
+    }
+
+    .cta {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .cta a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .cta a:hover {
+        text-decoration: underline;
     }
 </style>
 {% endblock %}

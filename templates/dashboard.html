@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}
+User
+{% endblock %}
+
+
+{% block content %}
+<div class="dashboard-container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+
+    {% for msg in messages %}
+    <p class="flash-message">{{msg}}</p>
+    {% endfor %}
+
+    {% endif %}
+    {% endwith %}
+
+    <h2>Welcome, {{user}}</h2>
+
+    <div class="overview">
+        <p>Your digital greenhouse is at your fingertips! Monitor and manage your greenhouse environment efficiently
+            from this dashboard.</p>
+    </div>
+
+    <div class="dashboard-features">
+        <h3>Dashboard Features:</h3>
+        <ul>
+            <li><strong>Real-Time Data:</strong> View current conditions including temperature, humidity, soil moisture,
+                soil pH, and light levels.</li>
+            <li><strong>Historical Data:</strong> Access detailed graphs and charts to analyze trends over time and make
+                informed decisions.</li>
+            <li><strong>Alerts & Notifications:</strong> Set and manage alerts for critical conditions, ensuring timely
+                responses to any issues.</li>
+            <li><strong>Remote Control:</strong> Adjust settings for temperature, humidity, and lighting from anywhere,
+                optimizing conditions for plant growth.</li>
+            <li><strong>User Management:</strong> Admins can manage user access and permissions, ensuring secure and
+                appropriate use of the system.</li>
+        </ul>
+    </div>
+
+    <div class="call-to-action">
+        <p>Need to adjust settings or view detailed data? Use the navigation menu to access specific features and start
+            managing your greenhouse efficiently!</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    .dashboard-container {
+        background-color: azure;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        text-align: center;
+    }
+
+    .flash-message {
+        font-size: 30px;
+        color: #e74c3c;
+        background-color: #f8d7da;
+        padding: 8px;
+        text-align: center;
+    }
+
+    .overview {
+        margin-top: 20px;
+        font-size: 16px;
+    }
+
+    .dashboard-features {
+        margin-top: 20px;
+        text-align: left;
+    }
+
+    .dashboard-features h3 {
+        margin-bottom: 10px;
+    }
+
+    .dashboard-features ul {
+        list-style-type: disc;
+        padding-left: 20px;
+    }
+
+    .dashboard-features li {
+        margin-bottom: 10px;
+    }
+
+    .call-to-action {
+        margin-top: 20px;
+        font-size: 16px;
+    }
+</style>
+{% endblock %}

@@ -6,6 +6,9 @@
 <div class="greenhouse-info">
     <h2>Geenhouse {{r}}</h2>
 
+    <p>Welcome to the monitoring dashboard for your greenhouse. Here, you can view real-time data and trends to better
+        understand and manage your growing environment.</p>
+
     <table>
         <thead>
             <tr>
@@ -27,14 +30,32 @@
         </tbody>
     </table>
 
+    <div class="data-summary">
+        <p><strong>Current Conditions:</strong> The table above displays the most recent data entries, providing a
+            snapshot of the temperature and humidity levels alongside the types of crops currently monitored.</p>
+        <p>Regularly reviewing this data helps in maintaining optimal conditions, ensuring the health and productivity
+            of your plants.</p>
+    </div>
+
     <div class="chart-container">
         <h3>Temperature Over Time</h3>
         {{ temperature_chart|safe }}
+        <p>Track temperature variations throughout the day. Consistent monitoring helps in identifying trends and making
+            necessary adjustments to maintain ideal conditions.</p>
     </div>
 
     <div class="chart-container">
         <h3>Humidity Over Time</h3>
         {{ humidity_chart|safe }}
+        <p>Monitor humidity levels to prevent issues such as mold or dehydration, which can affect crop health and
+            yield.</p>
+    </div>
+
+    <br><br><br><br>
+
+    <div class="call-to-action">
+        <p>For more detailed analytics and control options, visit the <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            page. Stay proactive in managing your greenhouse environment!</p>
     </div>
 
 </div>
@@ -72,8 +93,32 @@
     }
 
     .chart-container {
-        width: 45%;
+        /* width: 100%; */
         box-sizing: border-box;
+    }
+
+    .chart-container h3 {
+        margin-bottom: 10px;
+    }
+
+    .data-summary {
+        margin: 20px 0;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .call-to-action {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .call-to-action a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .call-to-action a:hover {
+        text-decoration: underline;
     }
 </style>
 {% endblock %}
